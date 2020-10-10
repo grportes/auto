@@ -1,5 +1,4 @@
 import React from 'react';
-import { useEffect } from 'react';
 import { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -8,11 +7,8 @@ import AddIcon from '@material-ui/icons/Add';
 
 
 import useStyles from './styles';
+import {getDate} from '@utils/date';
 
-const getDate = () => {
-    const date = new Date();
-    return date.getFullYear()+'-' + (date.getMonth()+1) + '-'+date.getDate();
-}
 
 const Componente = () => {
 
