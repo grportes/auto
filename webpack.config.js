@@ -29,7 +29,9 @@ module.exports = {
     ],
     resolve: {
         alias: {
-            '@utils': path.resolve(__dirname, 'src', 'infra', 'utils')
+            '@utils': path.resolve(__dirname, 'src', 'infra', 'utils'),
+            '@components': path.resolve(__dirname, 'src', 'infra', 'components'),
+            '@repository': path.resolve(__dirname, 'src', 'repository'),
         }
     }    
 };

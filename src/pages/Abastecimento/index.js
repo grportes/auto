@@ -5,9 +5,10 @@ import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
-
 import useStyles from './styles';
 import {getDate} from '@utils/date';
+import AbastecimentoRepository from '@repository/Abastecimento';
+import NumberFormat from '@components/CustomNumberFormat';
 
 
 const Componente = () => {
@@ -16,7 +17,7 @@ const Componente = () => {
         km: '',
         dia: getDate(),
         hora: '',
-        valor: 0.00
+        valor: ''
     });
 
     const setValue = ({ target }) => setAbastecimento({ ...abastecimento, [target.name]: target.value });
@@ -29,12 +30,13 @@ const Componente = () => {
             autoComplete='off'
             onSubmit={e => {
                 e.preventDefault();
-                console.log(abastecimento);
+                AbastecimentoRepository.save(abastecimento);
             }}
 
         >
 
             <TextField
+                type='number'
                 label='Km:'
                 name='km'
                 value={abastecimento.km}
@@ -48,9 +50,7 @@ const Componente = () => {
                 name='dia'
                 value={abastecimento.dia}
                 onChange={setValue}
-                InputLabelProps={{
-                    shrink: true,
-                }}
+                InputLabelProps={{ shrink: true }}
                 required
             />
 
@@ -60,12 +60,8 @@ const Componente = () => {
                 name='hora'
                 value={abastecimento.hora}
                 onChange={setValue}
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                inputProps={{
-                    step: 300, // 5 min
-                }}
+                InputLabelProps={{ shrink: true }}
+                InputProps={{ step: 300 }}
                 required
             />
 
@@ -75,6 +71,7 @@ const Componente = () => {
                 value={abastecimento.valor}
                 onChange={setValue}
                 required
+                InputProps={{ inputComponent: NumberFormat }}
             />
 
             <Button 
