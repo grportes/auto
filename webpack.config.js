@@ -31,6 +31,7 @@ module.exports = {
         alias: {
             '@utils': path.resolve(__dirname, 'src', 'infra', 'utils'),
             '@components': path.resolve(__dirname, 'src', 'infra', 'components'),
+            '@indexedDb': path.resolve(__dirname, 'src', 'infra', 'indexedDb'),
             '@repository': path.resolve(__dirname, 'src', 'repository'),
         }
     }    

@@ -1,18 +1,25 @@
-import {convFormatISO} from '@utils/date';
+import { convFormatISO } from '@utils/date';
 
-class Repository {
+const STORE = 'abastecimento';
 
-    static save(obj) {
-        const novoAbastecimento = {
-            ...obj,
-            km: parseFloat(obj.km),
-            valor: parseFloat(obj.valor),
-            data: convFormatISO({data: obj.dia, hora: obj.hora})
-        };
-        delete novoAbastecimento.dia;
-        delete novoAbastecimento.hora;
-    }
-
-}
-
-export default Repository;
+export const saveAbastecimento = (connection, abastecimento) => {
+    const novoAbastecimento = {
+        ...abastecimento,
+        km: parseFloat(abastecimento.km),
+        valor: parseFloat(abastecimento.valor),
+        data: convFormatISO({ data: abastecimento.dia, hora: abastecimento.hora })
+    };
+    delete novoAbastecimento.dia;
+    delete novoAbastecimento.hora;
+    return new Promise((resolve, reject) => {
+        const request  = connection
+            .transaction([STORE], 'readwrite')
+            .objectStore(STORE)
+            .add(novoAbastecimento);
+        request.onsuccess = e => resolve();
+        request.onerror = e => {
+            console.error(e.target.error);
+            reject('Falhou registro de abastecimento!');
+        }
+    });
+};
