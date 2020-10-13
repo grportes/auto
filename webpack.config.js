@@ -33,6 +33,9 @@ module.exports = {
             '@components': path.resolve(__dirname, 'src', 'infra', 'components'),
             '@indexedDb': path.resolve(__dirname, 'src', 'infra', 'indexedDb'),
             '@repository': path.resolve(__dirname, 'src', 'repository'),
+            '@commons': path.resolve(__dirname, 'src', 'commons'),
+            '@services': path.resolve(__dirname, 'src', 'services'),
+            '@context': path.resolve(__dirname, 'src', 'context')
         }
     }    
 };

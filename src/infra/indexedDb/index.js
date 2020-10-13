@@ -1,14 +1,18 @@
 const DB_NAME = 'arcom_auto';
 const DB_VERSION = 1;
-const STORES = ['abastecimento'];
+
+const STORES = [
+    {name: 'abastecimento', getTipoId: () => {return {autoIncrement: true}}},
+    {name: 'posto-abastecimento', getTipoId: () => {return {keyPath: 'id'}}}
+];
 
 let connection = null;
 let fnCloseConnection = null;
 
 const createStores = conn => {
     STORES.forEach(store => {
-        if (conn.objectStoreNames.contains(store)) return;
-        conn.createObjectStore(store, { autoIncrement: true });
+        if (conn.objectStoreNames.contains(store.name)) return;
+        conn.createObjectStore(store.name, store.getTipoId());
     });
 };
 
